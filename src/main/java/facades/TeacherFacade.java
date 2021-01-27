@@ -7,8 +7,11 @@ package facades;
 
 import dto.TeacherDTO;
 import entities.Teacher;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -42,5 +45,15 @@ public class TeacherFacade {
         } finally {
             em.close();
         }
+    }
+    
+    public List<TeacherDTO> getAllTeachers(){
+        EntityManager em = getEntityManager();
+        TypedQuery<Teacher> query = em.createQuery("SELECT t FROM Teacher t", Teacher.class);
+        List<TeacherDTO> teachers = new ArrayList<>();
+        for (Teacher t : query.getResultList()){
+            teachers.add(new TeacherDTO(t));
+        }
+        return teachers;
     }
 }

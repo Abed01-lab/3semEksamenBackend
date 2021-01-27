@@ -49,5 +49,12 @@ public class TeacherResource {
         FACADE.addTeacher(teacherDTO);
         return "{\"msg\":\"Added Successfully\"}";
     }
+    
+    @GET
+    @Path("all")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAllTeachers(){
+        return GSON.toJson(FACADE.getAllTeachers());
+    }
 
 }
