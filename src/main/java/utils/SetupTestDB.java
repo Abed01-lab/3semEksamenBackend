@@ -8,8 +8,10 @@ package utils;
 import entities.Course;
 import entities.CourseClass;
 import entities.Teacher;
+import facades.CourseFacade;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -33,6 +35,7 @@ public class SetupTestDB {
         Teacher t1 = new Teacher("Jesper", "jesper@gmail.com"); 
         Teacher t2 = new Teacher("Jørg", "Jørg@gmail.com"); 
         Teacher t3 = new Teacher("Hanne", "Hanne@gmail.com"); 
+        Teacher t4 = new Teacher("Abed", "Hanne@gmail.com"); 
         
         courseClass1.addTeachers(t3);
         courseClass1.addTeachers(t2);
@@ -43,6 +46,15 @@ public class SetupTestDB {
         em.persist(courseClass1);
         em.persist(courseClass2);
         em.getTransaction().commit();
+        
+        em.getTransaction().begin();
+        courseClass1.addTeachers(t4);
+        em.getTransaction().commit();
+        
+        TypedQuery<Course> query = em.createQuery("SELECT c FROM Course c", Course.class);
+        for (Course c : query.getResultList()){
+            System.out.println(c.getCourseName());
+        }
 
     }
 }
