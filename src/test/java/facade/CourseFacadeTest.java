@@ -2,7 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
+ 
 package facade;
 
 import dto.CourseDTO;
@@ -25,7 +25,7 @@ import utils.EMF_Creator;
 /**
  *
  * @author abed
- */
+ 
 public class CourseFacadeTest {
     private static EntityManagerFactory emf;
     private static CourseFacade facade;
@@ -84,4 +84,4 @@ public class CourseFacadeTest {
         facade.updateCourse(new CourseDTO(1, "test", "test tester"));
         assertThat("test", not(equalTo(c1.getCourseName())));
     }
-}
+}*/
